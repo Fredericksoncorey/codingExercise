@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom"
-
+import {Search} from "./components"
 function App() {
   
   const [searchHistory, setSearchHistory] = useState()
   
-  
+
   return (
     <Router>
       <nav>
@@ -15,8 +15,17 @@ function App() {
           <Link to='/history'>Search History</Link>
         </div>
       </nav>
+
+      <main>
+        <Route exact path = "/">
+          <Search />
+        </Route>
+      </main>
     </Router>
   );
+
 }
+
+
 
 export default App;
