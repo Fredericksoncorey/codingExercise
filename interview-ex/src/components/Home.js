@@ -1,8 +1,7 @@
-import {React, useEffect, useState} from 'react';
+import {React, useEffect, useState} from "react";
+
 const Home = ()=>{
     return(<h1>Hello World</h1>)
 }
-
-
 
 export default Home

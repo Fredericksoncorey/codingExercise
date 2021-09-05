@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom"
-import {Search, Home} from "./components"
+import {Search, Home, History} from "./components"
 function App() {
   
   const [searchHistory, setSearchHistory] = useState()
@@ -11,9 +11,9 @@ function App() {
       <nav>
         <h1>Search</h1>
         <div>
-          <Link to='/'>Home</Link>
-          <Link to='/history'>Search History</Link>
-          <Link to='/search'>Search History</Link>
+          <Link to="/">Home</Link>
+          <Link to="/history">History</Link>
+          <Link to="/search">Search</Link>
 
         </div>
       </nav>
@@ -29,7 +29,7 @@ function App() {
           </Route>
 
           <Route path = "/history">
-
+            <History />
           </Route>
 
 
