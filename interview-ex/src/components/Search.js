@@ -1,6 +1,6 @@
 import {React, useEffect, useState} from 'react';
-const Search = ({})=>{
-    <h1>Hello World</h1>
+const Search = ()=>{
+    return(<h1>Search the World</h1>)
 }
 
 
