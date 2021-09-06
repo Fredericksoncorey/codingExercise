@@ -3,12 +3,17 @@ const mostRecentURL = "http://hn.algolia.com/api/v1/search_by_date?query="
 
 export const getSearchResults = async (searchStr, searchTag)=>{
     try{
-        if(searchTag){
+        if(searchTag==="author_"){
+            const response = await fetch (uRL+searchStr+"&tags="+searchTag+searchStr);
+            const data = response.json();
+            console.log("Hit")
+            console.log(uRL+searchStr+"&tags="+searchTag+searchStr)
+            return data 
+        }else if(searchTag){
             const response = await fetch (uRL+searchStr+"&tags="+searchTag);
             const data = response.json();
-        return data 
-        }
-        else{
+            return data
+        }else{
             const response = await fetch (uRL+searchStr);
             const data = response.json();
         return data 

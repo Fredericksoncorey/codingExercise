@@ -1,5 +1,5 @@
 import {React, useEffect, useState} from "react";
-import {getSearchResults, getSearchResultsByDate} from "./api"
+import {getSearchResults, getSearchResultsByDate} from "../api"
 
 const Search = ()=>{
     const [searchParam, setSearchParam] = useState([]);
@@ -14,6 +14,9 @@ const Search = ()=>{
         try {
             if(anyOrRecent){
                 setSearchResults(await getSearchResultsByDate(searchParam, selectedTag))
+                console.log(searchResults)
+            }else{
+                setSearchResults(await getSearchResults(searchParam, selectedTag))
                 console.log(searchResults)
             }
             
@@ -37,13 +40,12 @@ const Search = ()=>{
                     <option value="comment">Comment</option>
                     <option value="poll">Poll</option>
                     <option value="front_page">On Front Page</option>
-                    <option value="author_:USERNAME">Author</option>
+                    <option value="author_">Author</option>
                 </select>
                 <select 
                     onChange={(e) => {
                         return setAnyOrRecent(e.target.value)}}
                 >
-                    
                     <option value={false}>Any</option> 
                     <option value={true}>Most Recent</option>      
                 
