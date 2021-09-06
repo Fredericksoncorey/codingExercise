@@ -1,15 +1,25 @@
 import {React, useEffect, useState} from "react";
-// import {} PAUSED HERE!!!
+import {getSearchResults, getSearchResultsByDate} from "./api"
 
 const Search = ()=>{
     const [searchParam, setSearchParam] = useState([]);
-    const [selectedSearch, setSelectedSearch] = useState();
+    const [selectedTag, setSelectedTag] = useState();
     const [anyOrRecent, setAnyOrRecent] = useState();
+    const [searchResults, setSearchResults] = useState()
     
-    useEffect(() => {}, [selectedSearch])
+    useEffect(() => {}, [selectedTag])
 
-    const handleSubmit = ()=>{
+    const handleSubmit = async (e)=>{
+        e.preventDefault()
+        try {
+            if(anyOrRecent){
+                setSearchResults(await getSearchResultsByDate(searchParam, selectedTag))
+                console.log(searchResults)
+            }
+            
+        }catch (error) {
         
+        }
     }
 
     return(
@@ -20,7 +30,7 @@ const Search = ()=>{
                 <select
                     name="select"
                     onChange={(e) => {
-                        return setSelectedSearch(e.target.value)}}
+                        return setSelectedTag(e.target.value)}}
                 >
                     <option value={false}>Non-specific</option>
                     <option value="story">Story</option>
@@ -41,19 +51,20 @@ const Search = ()=>{
                 
                 
                         <button onClick={()=>{
-                    setSelectedSearch(null)
+                    setSelectedTag(null)
                     setSearchParam(null)
                 }}>Reset</button> 
 
-{console.log(selectedSearch, searchParam, anyOrRecent)}
+{console.log(selectedTag, searchParam, anyOrRecent)}
             </form>
-            <input
-                placeholder="Keywords or sentences"
-                onChange={(e) => {
-                    setSearchParam(e.target.value)}}
-            />
-            <button onSubmit={handleSubmit}></button>
-            
+            <form onSubmit={handleSubmit}>
+                <input
+                    placeholder="Keywords or sentences"
+                    onChange={(e) => {
+                        setSearchParam(e.target.value)}}
+                />
+                <button type="submit">Search</button>
+            </form>
         </div>
         
     )
