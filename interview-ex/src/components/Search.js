@@ -1,4 +1,5 @@
 import {React, useEffect, useState} from "react";
+// import {} PAUSED HERE!!!
 
 const Search = ()=>{
     const [searchParam, setSearchParam] = useState([]);
@@ -6,6 +7,10 @@ const Search = ()=>{
     const [anyOrRecent, setAnyOrRecent] = useState();
     
     useEffect(() => {}, [selectedSearch])
+
+    const handleSubmit = ()=>{
+        
+    }
 
     return(
         <div>
@@ -39,9 +44,16 @@ const Search = ()=>{
                     setSelectedSearch(null)
                     setSearchParam(null)
                 }}>Reset</button> 
-                
+
 {console.log(selectedSearch, searchParam, anyOrRecent)}
             </form>
+            <input
+                placeholder="Keywords or sentences"
+                onChange={(e) => {
+                    setSearchParam(e.target.value)}}
+            />
+            <button onSubmit={handleSubmit}></button>
+            
         </div>
         
     )
