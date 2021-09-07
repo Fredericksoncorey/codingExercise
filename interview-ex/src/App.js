@@ -1,10 +1,10 @@
 import React, {useState} from "react";
-import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom"
-import {Search, Home, History} from "./components"
+import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
+import {Search, Home, History} from "./components";
 function App() {
   
-  const [searchHistory, setSearchHistory] = useState()
-  
+  const [searchHistory, setSearchHistory] = useState([]);
+
   
 
   return (
@@ -22,15 +22,20 @@ function App() {
       <main>
         <Switch>
           <Route exact path = "/">
-            <Home />
+            <Home/>
           </Route>
           
           <Route path = "/search">
-            <Search />
+            <Search 
+              searchHistory={searchHistory} 
+              setSearchHistory={setSearchHistory} 
+            />
           </Route>
 
           <Route path = "/history">
-            <History />
+            <History 
+              searchHistory={searchHistory} 
+            />
           </Route>
 
 
@@ -41,7 +46,7 @@ function App() {
     </Router>
   );
 
-}
+};
 
 
 

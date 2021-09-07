@@ -6,8 +6,6 @@ export const getSearchResults = async (searchStr, searchTag)=>{
         if(searchTag==="author_"){
             const response = await fetch (uRL+searchStr+"&tags="+searchTag+searchStr);
             const data = response.json();
-            console.log("Hit")
-            console.log(uRL+searchStr+"&tags="+searchTag+searchStr)
             return data 
         }else if(searchTag){
             const response = await fetch (uRL+searchStr+"&tags="+searchTag);
@@ -25,10 +23,21 @@ export const getSearchResults = async (searchStr, searchTag)=>{
 }
 
 export const getSearchResultsByDate = async (searchStr, searchTag)=>{
+    
     try{
-        const response = await fetch (mostRecentURL+searchStr);
-        const data = response.json();
-        return data
+        if(searchTag==="author_"){
+            const response = await fetch (mostRecentURL+searchStr+"&tags="+searchTag+searchStr);
+            const data = response.json();
+            return data 
+        }else if(searchTag){
+            const response = await fetch (mostRecentURL+searchStr+"&tags="+searchTag);
+            const data = response.json();
+            return data
+        }else{
+            const response = await fetch (mostRecentURL+searchStr);
+            const data = response.json();
+        return data 
+        }
     }catch(error){
         console.error(error)
     }
