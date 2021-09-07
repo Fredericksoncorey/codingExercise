@@ -1,5 +1,5 @@
 import {React, useEffect, useState} from "react";
-import {getSearchResults, getSearchResultsByDate} from "../api"
+import {getSearchResults, getSearchResultsByDate} from "../api";
 
 const Search = ({searchHistory})=>{
     const [searchParam, setSearchParam] = useState();
@@ -36,13 +36,12 @@ const Search = ({searchHistory})=>{
                     input:searchParam
                     }
                 );
-                console.log(searchResults)
             }
             
         }catch (error) {
-        
+            console.error(error);
         }
-    }
+    };
 
     return(
         <div>
@@ -78,7 +77,6 @@ const Search = ({searchHistory})=>{
                     setSearchResults(null)
                 }}>Reset</button> 
 
-{console.log(selectedTag, searchParam, anyOrRecent)}
             </form>
             <form onSubmit={handleSubmit}>
                 <input
@@ -95,7 +93,7 @@ const Search = ({searchHistory})=>{
                         {result.title ? <h3>{result.title}</h3> : <h3>{result.story_title}</h3>}
                         {result.url ? <a href={result.url}>{result.url}</a> : <a href={result.story_url}>{result.story_url}</a> }
                         <p><b>By {result.author}</b></p>
-                        <p>Points: {result.points}</p>
+                        {result.points ? <p>Points: {result.points}</p> : null}
                         {result.num_comments ? <p>Number of comments {result.num_comments}</p> : null}
                         {result.relevency_score ? <p>Relevancy score: {result.relevancy_score}</p> : null}
                         <hr></hr>
@@ -103,13 +101,12 @@ const Search = ({searchHistory})=>{
                     </div>)
                 })
                  : null}
-            </div> {console.log(searchResults?.hits)}
+            </div> 
         
 
-            {searchResults?.hits==false ? <h3>No Results were returned</h3> : null}
-         <button onClick={()=>{console.log(searchHistory)}}>Check</button>
+        {searchResults?.hits==false ? <h3>No Results were returned</h3> : null}
          </div>
     )
-}
+};
 
-export default Search
+export default Search;

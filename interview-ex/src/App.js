@@ -1,4 +1,3 @@
-import React, {useState} from "react";
 import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
 import {Search, Home, History} from "./components";
 function App() {
