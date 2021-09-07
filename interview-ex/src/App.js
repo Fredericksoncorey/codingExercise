@@ -3,7 +3,7 @@ import {BrowserRouter as Router, Link, Switch, Route} from "react-router-dom";
 import {Search, Home, History} from "./components";
 function App() {
   
-  const [searchHistory, setSearchHistory] = useState([]);
+  const searchHistory = []
 
   
 
@@ -12,9 +12,9 @@ function App() {
       <nav>
         <h1>Search</h1>
         <div>
-          <Link to="/">Home</Link>
-          <Link to="/history">History</Link>
-          <Link to="/search">Search</Link>
+          <Link to="/">Home </Link>
+          <Link to="/history"> History </Link>
+          <Link to="/search"> Search </Link>
 
         </div>
       </nav>
@@ -27,8 +27,7 @@ function App() {
           
           <Route path = "/search">
             <Search 
-              searchHistory={searchHistory} 
-              setSearchHistory={setSearchHistory} 
+              searchHistory={searchHistory}  
             />
           </Route>
 

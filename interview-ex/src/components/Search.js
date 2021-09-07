@@ -1,7 +1,7 @@
 import {React, useEffect, useState} from "react";
 import {getSearchResults, getSearchResultsByDate} from "../api"
 
-const Search = ({searchHistory, setSearchHistory})=>{
+const Search = ({searchHistory})=>{
     const [searchParam, setSearchParam] = useState();
     const [selectedTag, setSelectedTag] = useState();
     const [anyOrRecent, setAnyOrRecent] = useState();
@@ -20,22 +20,21 @@ const Search = ({searchHistory, setSearchHistory})=>{
         try {
             if(anyOrRecent){
                 setSearchResults(await getSearchResultsByDate(searchParam, selectedTag))
-                setSearchHistory(searchHistory.push({
+                searchHistory.push({
                     time:anyOrRecent,
                     tag:selectedTag,
                     input:searchParam
-                        }
-                    )
+                    }
                 );
+                
                 console.log(searchResults)
             }else{
                 setSearchResults(await getSearchResults(searchParam, selectedTag))
-                setSearchHistory(searchHistory.push({
+                searchHistory.push({
                     time:anyOrRecent,
                     tag:selectedTag,
                     input:searchParam
-                        }
-                    )
+                    }
                 );
                 console.log(searchResults)
             }
@@ -93,12 +92,12 @@ const Search = ({searchHistory, setSearchHistory})=>{
                 
                 {searchResults ? searchResults?.hits.map(result =>{
                     return(<div>
-                        <h3>{result.title}</h3>
-                        <a href={result.url}>{result.url}</a>
+                        {result.title ? <h3>{result.title}</h3> : <h3>{result.story_title}</h3>}
+                        {result.url ? <a href={result.url}>{result.url}</a> : <a href={result.story_url}>{result.story_url}</a> }
                         <p><b>By {result.author}</b></p>
                         <p>Points: {result.points}</p>
-                        <p>Number of comments {result.num_comments}</p>
-                        <p>Relevancy score: {result.relevancy_score}</p>
+                        {result.num_comments ? <p>Number of comments {result.num_comments}</p> : null}
+                        {result.relevency_score ? <p>Relevancy score: {result.relevancy_score}</p> : null}
                         <hr></hr>
 
                     </div>)
@@ -108,6 +107,7 @@ const Search = ({searchHistory, setSearchHistory})=>{
         
 
             {searchResults?.hits==false ? <h3>No Results were returned</h3> : null}
+         <button onClick={()=>{console.log(searchHistory)}}>Check</button>
          </div>
     )
 }
