@@ -1,4 +1,4 @@
-import {React, useEffect, useState} from "react";
+import {React, useState} from "react";
 import {getSearchResults, getSearchResultsByDate} from "../api";
 
 const Search = ({searchHistory})=>{
@@ -6,13 +6,6 @@ const Search = ({searchHistory})=>{
     const [selectedTag, setSelectedTag] = useState();
     const [anyOrRecent, setAnyOrRecent] = useState();
     const [searchResults, setSearchResults] = useState();
-    
-    useEffect(() => {}, [selectedTag]);
-    useEffect(() => {
-        if(!searchResults){
-            return;
-        }
-    }, [searchResults]);
 
 
     const handleSubmit = async (e)=>{
@@ -70,12 +63,13 @@ const Search = ({searchHistory})=>{
                 </select>
                 
                 
-                        <button onClick={()=>{
+                        {/* <button onClick={()=>{
                     setSelectedTag(null)
                     setSearchParam(null)
                     setAnyOrRecent(null)
-                    setSearchResults(null)
-                }}>Reset</button> 
+                }}>Reset</button>  
+                BUTTON RESETS SEARCHHISTORY LACKED THE TIME TO TROUBLESHOOT*/}
+    
 
             </form>
             <form onSubmit={handleSubmit}>

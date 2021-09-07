@@ -1,7 +1,6 @@
 const History = ({searchHistory})=>{
     return( 
         <div>   
-            <h1>Search History</h1>
             {searchHistory.map(search=>{
                 return(
                     <>
@@ -16,6 +15,7 @@ const History = ({searchHistory})=>{
                     }
                 )
             }
+            
         </div>  
     )
 };
